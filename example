@@ -1,0 +1,31 @@
+static void Main(string[] args)
+        {
+            bmp image = new bmp(@"C:\projects\aaa.bmp");
+            bitmap bt = image.GetColorMap();
+
+            ///////////Write
+            for (int y = 0; y < image.height; y++)
+            {
+                for (int x = 0; x < image.width; x++)
+                {
+                    bt[x, y] = new color(x * 255 / image.width, 0, y * 255/ image.height);
+                }
+            }
+
+            ///////////Read
+            for (int y = 0; y < image.height; y++) 
+            {
+                for (int x = 0; x < image.width; x++)
+                {
+
+                    if (bt[x, y] == new color(255, 0, 0)) Console.BackgroundColor = ConsoleColor.Red;
+                    else if (bt[x, y] == new color(0, 255, 0)) Console.BackgroundColor = ConsoleColor.Green;
+                    else if (bt[x, y] == new color(0, 0, 255)) Console.BackgroundColor = ConsoleColor.Blue;
+                    else if (bt[x, y] == new color(255, 255, 255)) Console.BackgroundColor = ConsoleColor.White;
+                    else if (bt[x, y] == new color(0, 0, 0)) Console.BackgroundColor = ConsoleColor.Black;
+                    Console.SetCursorPosition(x, y);
+                    Console.Write(" ");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+            }
+        }
